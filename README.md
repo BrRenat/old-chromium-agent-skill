@@ -1,7 +1,32 @@
-# old-chromium-agent-skill
+<div align="center">
 
-Let a coding agent launch, test and debug your build in a real old Chromium via
-CrossOver and DevTools Protocol.
+<img src="docs/hero.png" alt="Claude Code driving a real old Chromium over the DevTools Protocol" width="840">
+
+# Give an AI Agent the Ability to Test Your App in a Legacy Browser
+
+**Let a coding agent launch, test and debug your build in a real old Chromium via CrossOver and DevTools Protocol.**
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-3fb950.svg)](LICENSE)
+[![Node](https://img.shields.io/badge/Node-%E2%89%A5%2022-5fa04e.svg)](https://nodejs.org)
+[![Platform](https://img.shields.io/badge/Platform-macOS-4c4c4c.svg)](#requirements)
+[![Claude skill](https://img.shields.io/badge/Claude-skill-d97757.svg)](#install-as-a-claude-skill)
+
+[**Read the write-up &rarr;**](https://medium.com/@renatberezovsky/how-to-give-an-ai-agent-the-ability-to-test-your-app-in-a-legacy-browser-b16f86f9590a?sharedUserId=renatberezovsky)
+
+</div>
+
+## Contents
+
+- [What it is](#what-it-is)
+- [Requirements](#requirements)
+- [Getting a Chromium snapshot](#getting-a-chromium-snapshot)
+- [Bottle setup](#bottle-setup)
+- [Install as a Claude skill](#install-as-a-claude-skill)
+- [Usage](#usage)
+- [Exit codes](#exit-codes)
+- [Using a different Chromium version](#using-a-different-chromium-version)
+- [Scope limit](#scope-limit)
+- [Reference](#reference)
 
 ## What it is
 
@@ -212,6 +237,12 @@ media element behaviour, input handling, or vendor patches applied on top of the
 upstream build. A pass here means the bundle parses and boots on an engine of
 that vintage. Whether it works on the actual target runtime is still a separate
 question — do not read a green run as confidence in the target device.
+
+## Reference
+
+[Give an AI Agent the Ability to Test Your App in a Legacy
+Browser](https://medium.com/@renatberezovsky/how-to-give-an-ai-agent-the-ability-to-test-your-app-in-a-legacy-browser-b16f86f9590a?sharedUserId=renatberezovsky)
+— the write-up this repo comes from.
 
 ## License
 
