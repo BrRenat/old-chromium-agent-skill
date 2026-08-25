@@ -10,7 +10,7 @@
 #   CDP_PORT    DevTools Protocol port         (default: 9222)
 #   CX_PROFILE  Windows path for --user-data-dir (default: C:\cxprofile)
 #   CX_BIN      path to CrossOver's cxstart    (default: the CrossOver.app bundle path)
-#   CX_UA       --user-agent string            (default: a plain desktop Chrome 53 UA)
+#   CX_UA       --user-agent override          (default: unset — the browser's own UA)
 #   CX_LOG      browser stdout/stderr log      (default: ./cx-artifacts/chrome.log)
 #
 # Exits 0 once CDP responds on CDP_PORT, 1 if cxstart is missing or the browser
@@ -22,8 +22,17 @@ EXE="${CX_EXE:-C:\\chrome-win32 2\\chrome.exe}"
 PORT="${CDP_PORT:-9222}"
 PROFILE="${CX_PROFILE:-C:\\cxprofile}"
 CX="${CX_BIN:-/Applications/CrossOver.app/Contents/SharedSupport/CrossOver/bin/cxstart}"
-UA="${CX_UA:-Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36}"
 LOG="${CX_LOG:-./cx-artifacts/chrome.log}"
+
+# No user agent is set by default: the browser reports its own, which is what a
+# harness about the engine should show. Set CX_UA only when the build sniffs the
+# UA or the server serves per-UA bundles.
+# The ${arr[@]+...} form is for bash 3.2, which macOS still ships: expanding an
+# empty array under `set -u` is an error there.
+UA_FLAG=()
+if [[ -n "${CX_UA:-}" ]]; then
+  UA_FLAG=(--user-agent="$CX_UA")
+fi
 
 if [[ ! -x "$CX" ]]; then
   echo "cxstart not found at $CX" >&2
@@ -58,7 +67,7 @@ echo "launching $EXE in bottle '$BOTTLE' (CDP :$PORT)" >&2
   --disable-translate \
   --disable-background-networking \
   --window-size=1920,1080 \
-  --user-agent="$UA" \
+  ${UA_FLAG[@]+"${UA_FLAG[@]}"} \
   about:blank \
   >"$LOG" 2>&1 &
 

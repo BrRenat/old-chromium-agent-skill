@@ -146,13 +146,12 @@ Use `--ignore` with comma-separated substrings to suppress known-noisy messages
 `CX_BOTTLE` (default `old-chromium`), `CX_EXE` (default `C:\chrome-win32 2\chrome.exe`),
 `CDP_PORT` (9222), `CX_PROFILE`, `CX_BIN`, `CX_UA`, `CX_LOG`.
 
-`CX_UA` defaults to a plain desktop Chrome 53 user agent. Override it when the
-build sniffs for a particular device or the server serves per-UA bundles — for
-example, to present as a 2018-era TV browser:
+`CX_UA` is unset by default — the browser reports its own user agent, which is
+what a harness about the engine should show. Set it only when the build sniffs
+the UA or the server serves per-UA bundles:
 
 ```bash
-CX_UA='Mozilla/5.0 (SMART-TV; Linux; Tizen 4.0) AppleWebKit/537.36 (KHTML, like Gecko) 53.0.2785.34/4.0 TV Safari/537.36' \
-  bash scripts/launch.sh
+CX_UA='<user agent string>' bash scripts/launch.sh
 ```
 
 This changes what the page is told, not what the engine is. See "Scope limit".
