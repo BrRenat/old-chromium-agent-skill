@@ -1,0 +1,6 @@
+{
+  "plugins": ["compat"],
+  "rules": { "compat/compat": "error" },
+  "settings": { "browsers": ["chrome 53"] },
+  "env": { "browser": true }
+}
